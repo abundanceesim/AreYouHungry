@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/purple_500"
     app:title="Project"
-    app:titleTextColor="@color/black">
+    app:titleTextColor="@color/white">
     <!--app:navigationIcon="@color/white"-->
     <!--android:background="#BECC00"-->
     <!--app:titleTextColor="@color/white"-->

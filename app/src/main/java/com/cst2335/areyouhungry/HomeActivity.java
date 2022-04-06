@@ -1,22 +1,100 @@
 package com.cst2335.areyouhungry;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
+import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomeActivity extends AppCompatActivity {
+    /**TO DO:
+     * Make Snackbar work
+     * Use Aync Task to retrieve probably a title for the recipe app
+     * Make frame layout and use it for the person's name or something. Create a fragment and pass the person's name into it
+     * Add a login button that redirects the user to an activity(HomeFragment) which is an About page.
+     * "Thank you so much for using our app, usersName! We really hope you enjoy the experience. Please do well to leave a rating for our app
+     * on Play Store. Once again, thank you!
+     * From the team at RecipeWorks.co"
+     * */
+    Toolbar tBar;
+    ProgressBar progressBar;
+    Button goToSearchPage;
+    int counter = 0;
+    EditText name;
+    Button signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Toolbar tBar = findViewById(R.id.toolBar);
+        tBar = findViewById(R.id.toolBar);
         setSupportActionBar(tBar);
-        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setTitle("Home v1.0.0 by Abundance");
+
+        goToSearchPage = findViewById(R.id.goToSearch);
+        //progressBar = findViewById(R.id.progressBar);
+        //progressBar.setProgress(0);
+        /*goToSearchPage.setOnClickListener( click -> {
+            int progress = 25;
+            for(int i = 0; i < 4; i ++){
+                progressBar.setProgress(0 + progress);
+                progress = progress * 4;
+            }
+            Intent goToSearch = new Intent(HomeActivity.this, SearchActivity.class);
+            startActivity(goToSearch);
+        });*/
+
+
+        signUp = findViewById(R.id.signIn);
+        signUp.setOnClickListener( click -> {
+            name = findViewById(R.id.userName);
+            String userName = name.getText().toString();
+            //Bundle args = new Bundle();
+            //args.putString("username", userName);
+            //updateProgress();
+            Intent goToSignUpPage = new Intent(HomeActivity.this, SignUpActivity.class);
+            goToSignUpPage.putExtra("username", userName);
+            startActivity(goToSignUpPage);
+        });
+
+        goToSearchPage.setOnClickListener( click -> {
+            updateProgress();
+            Toast.makeText(this, "Loading complete", Toast.LENGTH_SHORT).show();
+            Intent goToSearch = new Intent(HomeActivity.this, SearchActivity.class);
+            startActivity(goToSearch);
+        });
+
+    }
+
+    public void updateProgress(){
+        progressBar = findViewById(R.id.progressBar);
+        final Timer t = new Timer();
+        TimerTask tt = new TimerTask() {
+            @Override
+            public void run() {
+                counter+=50;
+                progressBar.setProgress(counter);
+            }
+        };
+        t.schedule(tt, 0, 100);
     }
 
     @Override
@@ -24,6 +102,56 @@ public class HomeActivity extends AppCompatActivity {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        String message = null;
+        //Look at your menu XML file. Put a case for every id in that file:
+        switch(item.getItemId())
+        {
+            //what to do when the menu item is selected:
+            case R.id.home_item:
+                message = "Already in Home";
+                break;
+            case R.id.search_item:
+                message = "Redirecting to Search page";
+                Intent goToSearch = new Intent(HomeActivity.this, SearchActivity.class);
+                startActivity(goToSearch);
+                break;
+            case R.id.recipe_item:
+                message = "Redirecting to Recipe details page";
+                Intent goToDetails = new Intent(HomeActivity.this, RecipeActivity.class);
+                startActivity(goToDetails);
+                break;
+            case R.id.favourites_item:
+                message = "Redirecting to Favourites";
+                Intent goToFavourites = new Intent(HomeActivity.this, FavouritesActivity.class);
+                startActivity(goToFavourites);
+                break;
+
+            case R.id.help_overflow:
+                //remember to make the snackbar
+                //Snackbar snack = Snackbar.make(R.id.help_overflow, "Help menu clicked", Snackbar.LENGTH_SHORT).show();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Help")
+
+                        .setMessage("Welcome to the Home Page of our recipe app. \nThis page contains a toolbar for navigation across " +
+                                "all pages. \nDo not forget to sign up using the text box and button below. ")
+                        //Remove row from list and also delete it from the database.
+                        .setPositiveButton("GOT IT", (click, arg) -> { })
+
+                        //Display the Alert Dialog.
+                        .create().show();
+
+        }
+        if ( message != null ) {
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        }
+        /*DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);*/
         return true;
     }
 

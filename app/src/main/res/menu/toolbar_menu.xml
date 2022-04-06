@@ -3,28 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/home"
+        android:id="@+id/home_item"
         android:title="Home"
         android:icon="@drawable/home_icon"
         app:showAsAction="always"
         android:orderInCategory="1"/>
 
     <item
-        android:id="@+id/search"
+        android:id="@+id/search_item"
         android:title="Search"
         android:icon="@drawable/search_icon"
         app:showAsAction="always"
         android:orderInCategory="2"/>
 
     <item
-        android:id="@+id/recipe"
+        android:id="@+id/recipe_item"
         android:title="Recipe Page"
         android:icon="@drawable/recipe_icon"
         app:showAsAction="always"
         android:orderInCategory="3"/>
 
     <item
-        android:id="@+id/favourites"
+        android:id="@+id/favourites_item"
         android:title="Favourites"
         android:icon="@drawable/favourites_icon"
         app:showAsAction="ifRoom"
