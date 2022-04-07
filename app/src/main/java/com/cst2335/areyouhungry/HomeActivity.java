@@ -24,7 +24,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class HomeActivity extends AppCompatActivity {
-    /**TO DO:
+    /**
+     * TO DO:
      * Make Snackbar work
      * Use Aync Task to retrieve probably a title for the recipe app
      * Make frame layout and use it for the person's name or something. Create a fragment and pass the person's name into it
@@ -32,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
      * "Thank you so much for using our app, usersName! We really hope you enjoy the experience. Please do well to leave a rating for our app
      * on Play Store. Once again, thank you!
      * From the team at RecipeWorks.co"
-     * */
+     */
     Toolbar tBar;
     ProgressBar progressBar;
     Button goToSearchPage;
@@ -64,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         signUp = findViewById(R.id.signIn);
-        signUp.setOnClickListener( click -> {
+        signUp.setOnClickListener(click -> {
             name = findViewById(R.id.userName);
             String userName = name.getText().toString();
             //Bundle args = new Bundle();
@@ -75,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(goToSignUpPage);
         });
 
-        goToSearchPage.setOnClickListener( click -> {
+        goToSearchPage.setOnClickListener(click -> {
             updateProgress();
             Toast.makeText(this, "Loading complete", Toast.LENGTH_SHORT).show();
             Intent goToSearch = new Intent(HomeActivity.this, SearchActivity.class);
@@ -84,13 +85,13 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void updateProgress(){
+    public void updateProgress() {
         progressBar = findViewById(R.id.progressBar);
         final Timer t = new Timer();
         TimerTask tt = new TimerTask() {
             @Override
             public void run() {
-                counter+=50;
+                counter += 50;
                 progressBar.setProgress(counter);
             }
         };
@@ -110,8 +111,7 @@ public class HomeActivity extends AppCompatActivity {
 
         String message = null;
         //Look at your menu XML file. Put a case for every id in that file:
-        switch(item.getItemId())
-        {
+        switch (item.getItemId()) {
             //what to do when the menu item is selected:
             case R.id.home_item:
                 message = "Already in Home";
@@ -121,11 +121,7 @@ public class HomeActivity extends AppCompatActivity {
                 Intent goToSearch = new Intent(HomeActivity.this, SearchActivity.class);
                 startActivity(goToSearch);
                 break;
-            case R.id.recipe_item:
-                message = "Redirecting to Recipe details page";
-                Intent goToDetails = new Intent(HomeActivity.this, RecipeActivity.class);
-                startActivity(goToDetails);
-                break;
+
             case R.id.favourites_item:
                 message = "Redirecting to Favourites";
                 Intent goToFavourites = new Intent(HomeActivity.this, FavouritesActivity.class);
@@ -141,13 +137,14 @@ public class HomeActivity extends AppCompatActivity {
                         .setMessage("Welcome to the Home Page of our recipe app. \nThis page contains a toolbar for navigation across " +
                                 "all pages. \nDo not forget to sign up using the text box and button below. ")
                         //Remove row from list and also delete it from the database.
-                        .setPositiveButton("GOT IT", (click, arg) -> { })
+                        .setPositiveButton("GOT IT", (click, arg) -> {
+                        })
 
                         //Display the Alert Dialog.
                         .create().show();
 
         }
-        if ( message != null ) {
+        if (message != null) {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
         /*DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
