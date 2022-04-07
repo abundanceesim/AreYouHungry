@@ -9,10 +9,14 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -20,15 +24,23 @@ public class SearchActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    EditText recentReceipes;
+
+    public static final String Shared_prefs = "sharedprefs";
+    public static final String TEXT = "Recent Receipes";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+
+        Button searchBtn = findViewById(R.id.search_button);
         Toolbar tBar = findViewById(R.id.toolBar);
         drawerLayout = findViewById(R.id.recipe_activity);
         navigationView = findViewById(R.id.nav_view);
+        recentReceipes=findViewById(R.id.search_recipe);
         setSupportActionBar(tBar);
         getSupportActionBar().setTitle("Recipe Search Page");
 
@@ -36,6 +48,14 @@ public class SearchActivity extends AppCompatActivity {
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+      searchBtn.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            // search code to display output of the receipe searched
+          }
+      });
+
 
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -53,6 +73,23 @@ public class SearchActivity extends AppCompatActivity {
 
             return true;
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences(Shared_prefs, MODE_PRIVATE);
+        String receipeSearch=sharedPreferences.getString(TEXT,"");
+        recentReceipes.setText(receipeSearch);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sharedPreferences = getSharedPreferences(Shared_prefs, MODE_PRIVATE);
+        SharedPreferences.Editor editor =sharedPreferences.edit();
+        editor.putString(TEXT,recentReceipes.getText().toString());
+        editor.apply();
     }
 
     @Override
