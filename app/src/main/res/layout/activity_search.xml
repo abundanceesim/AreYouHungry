@@ -1,11 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".SearchActivity"
+    android:orientation="vertical">
 
-    <include android:id="@+id/toolBar"  layout="@layout/toolbar_layout"/>
-    <include layout="@layout/navigation_layout"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include android:id="@+id/toolBar"  layout="@layout/toolbar_layout"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <EditText
+            android:id="@+id/searchText"
+            android:layout_width="220dp"
+            android:layout_height="48dp"
+            android:hint="Search here"
+            app:layout_constraintTop_toBottomOf="@+id/toolBar"/>
+
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+
+            app:layout_constraintTop_toBottomOf="@+id/toolBar" />
+
+        <TextView
+            android:id="@+id/queryResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Result would be displayed here"
+            app:layout_constraintTop_toBottomOf="@+id/searchText" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="409dp"
+            android:layout_height="580dp"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="150dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/queryResult"
+            />
+        <!--app:layout_constraintTop_toBottomOf="@id/searchButton"-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<include android:id="@+id/nav_view" layout="@layout/navigation_layout"/>-->
+</androidx.drawerlayout.widget.DrawerLayout>

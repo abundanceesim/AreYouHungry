@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
             // Get back arguments that were passed into the Bundle
             if (getArguments() != null) {
                 userName = getArguments().getString("username", "");
-                textView.setText("Welcome " + userName.toString(). + "!" + "\nThank you so much for using our app! We really hope you enjoy the experience. Please do well to leave a rating for our app" +
+                textView.setText("Welcome " + userName.toString() + "!" + "\nThank you so much for using our app! We really hope you enjoy the experience. Please do well to leave a rating for our app" +
                         " on Play Store. Once again, thank you!\n" +
                         "\n \n From the team at RecipeWorks.co");
             }
