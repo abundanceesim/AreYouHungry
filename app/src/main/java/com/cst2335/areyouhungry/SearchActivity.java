@@ -113,7 +113,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 for(int i = 0; i < resultsArray.length(); i++){
                     JSONObject resultsObject = resultsArray.getJSONObject(i);
-                    //int id = resultsObject.getInt("id");
+                    int id = resultsObject.getInt("id");
                     String recipeTitle = resultsObject.getString("title");
                     String recipeTitleLowerCase = recipeTitle.toLowerCase();
 
@@ -122,7 +122,7 @@ public class SearchActivity extends AppCompatActivity {
                         //resultText.setText(/*"Recipe " + */recipeTitle /*+ " with ID: " + id + " found"*/);
                         //Recipe recipe = new Recipe(recipeTitle);
                         Log.i(TAG, "Recipe found: " + recipeTitle) ;
-                        recipes.add(new Recipe(recipeTitle));
+                        recipes.add(new Recipe(recipeTitle, (long)id));
                         myAdapter.notifyDataSetChanged();
 
                     }
@@ -191,9 +191,11 @@ public class SearchActivity extends AppCompatActivity {
 
     public class Recipe{
         String title;
+        long id;
 
-        public Recipe(String title) {
+        public Recipe(String title, long id) {
             this.title = title;
+            this.id  = id;
         }
 
         public String getTitle() {
@@ -202,6 +204,14 @@ public class SearchActivity extends AppCompatActivity {
 
         public void setTitle(String title) {
             this.title = title;
+        }
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
         }
     }
 
