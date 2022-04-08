@@ -2,6 +2,7 @@ package com.cst2335.areyouhungry;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -65,9 +66,14 @@ public class SearchActivity extends AppCompatActivity {
             new searchTask().execute(searchQuery);
         });
 
-        myList.setOnItemClickListener(((adapterView, view, i, l) -> {
+        myList.setOnItemClickListener((adapterView, view, i, l) -> {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.recipe_frame, RecipeFragment.class, null)
+                    .setReorderingAllowed(true)
+                    .addToBackStack("recipe").commit();
 
-        }));
+        });
 
     }
 

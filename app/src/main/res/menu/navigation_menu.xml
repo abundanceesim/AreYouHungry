@@ -5,15 +5,15 @@
     <item
         android:id="@+id/home_item"
         android:title="Home"
-        android:icon="@drawable/home"
         app:showAsAction="always"
+        android:icon="@drawable/home_icon"
         android:orderInCategory="1"/>
 
     <item
         android:id="@+id/search_item"
         android:title="Search"
-        android:icon="@drawable/search"
         app:showAsAction="always"
+        android:icon="@drawable/search_icon"
         android:orderInCategory="2"/>
 
     <item
