@@ -3,6 +3,7 @@ package com.cst2335.areyouhungry;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +32,8 @@ import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
+    public static final String Shared_prefs = "sharedprefs";
+    public static final String TEXT = "Search ";
     EditText searchedRecipe;
     Button searchButton;
     TextView resultText;
@@ -66,6 +69,23 @@ public class SearchActivity extends AppCompatActivity {
 
         }));
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences(Shared_prefs, MODE_PRIVATE);
+        String recentRecepie = sharedPreferences.getString(TEXT, "");
+        searchedRecipe.setText(recentRecepie);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sharedPreferences = getSharedPreferences(Shared_prefs, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(TEXT, searchedRecipe.getText().toString());
+        editor.apply();
     }
 
     @Override
