@@ -26,7 +26,7 @@ public class RecipeFragment extends Fragment {
     Switch fav_switch;
     TextView recipeTitle;
     String title;
-    //boolean isFavourite;
+    boolean isFavourite;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -83,6 +83,7 @@ public class RecipeFragment extends Fragment {
 
         fav_switch.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
+                isFavourite = true;
                 Toast.makeText(getActivity(), "Added to favourites", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "Removed from favourites", Toast.LENGTH_LONG).show();

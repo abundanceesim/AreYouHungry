@@ -6,8 +6,14 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class FavouritesActivity extends AppCompatActivity {
+    /*FavouritesAdapter myAdapter;
+    ArrayList<Favourites> recipes = new ArrayList<>();  //array list that would contain messages.*/
+    ListView myList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
