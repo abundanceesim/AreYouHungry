@@ -62,6 +62,9 @@ public class SearchActivity extends AppCompatActivity {
             new searchTask().execute(searchQuery);
         });
 
+        myList.setOnItemClickListener(((adapterView, view, i, l) -> {
+
+        }));
 
     }
 
