@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -52,7 +53,7 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Recipe Search Page");
 
         myList = findViewById(R.id.listView);
-        myList.setAdapter( myAdapter = new RecipeAdapter());
+        myList.setAdapter(myAdapter = new RecipeAdapter());
 
         searchedRecipe = findViewById(R.id.searchText);
         String search = searchedRecipe.getText().toString();
@@ -67,11 +68,11 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         myList.setOnItemClickListener((adapterView, view, i, l) -> {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.recipe_frame, RecipeFragment.class, null)
-                    .setReorderingAllowed(true)
-                    .addToBackStack("recipe").commit();
+            Recipe recipe = recipes.get(i);
+            String title = recipe.getTitle();
+            Intent goToFragment = new Intent(this, RecipeDetailsActivity.class);
+            goToFragment.putExtra("title", title);
+            startActivity(goToFragment);
 
         });
 
@@ -102,13 +103,12 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
-    class searchTask extends AsyncTask<String, Integer, String>{
+    class searchTask extends AsyncTask<String, Integer, String> {
         //String URL = "https://api.spoonacular.com/recipes/complexSearch";
         static private final String TAG = "MyHTTPRequest";
 
         //Type3                Type1
-        public String doInBackground(String ... args)
-        {
+        public String doInBackground(String... args) {
             try {
 
                 URL url = new URL(args[0]);//create a URL object of what server to contact:
@@ -120,15 +120,14 @@ public class SearchActivity extends AppCompatActivity {
                 StringBuilder sb = new StringBuilder();
 
                 String line = null;
-                while ((line = reader.readLine()) != null)
-                {
+                while ((line = reader.readLine()) != null) {
                     sb.append(line + "\n");
                 }
                 String result = sb.toString(); //result is the whole string
 
 
                 myList = findViewById(R.id.listView);
-                myList.setAdapter( myAdapter = new RecipeAdapter());
+                myList.setAdapter(myAdapter = new RecipeAdapter());
 
 
                 JSONObject uvReport = new JSONObject(result); // convert string to JSON: Look at slide 27:
@@ -140,22 +139,21 @@ public class SearchActivity extends AppCompatActivity {
                 String searchLowerCase = search.toLowerCase();
                 resultText = findViewById(R.id.queryResult);
 
-                for(int i = 0; i < resultsArray.length(); i++){
+                for (int i = 0; i < resultsArray.length(); i++) {
                     JSONObject resultsObject = resultsArray.getJSONObject(i);
                     int id = resultsObject.getInt("id");
                     String recipeTitle = resultsObject.getString("title");
                     String recipeTitleLowerCase = recipeTitle.toLowerCase();
 
                     //Recipe recipe = new Recipe(recipeTitle);
-                    if(recipeTitleLowerCase.contains(searchLowerCase)){
+                    if (recipeTitleLowerCase.contains(searchLowerCase)) {
                         //resultText.setText(/*"Recipe " + */recipeTitle /*+ " with ID: " + id + " found"*/);
                         //Recipe recipe = new Recipe(recipeTitle);
-                        Log.i(TAG, "Recipe found: " + recipeTitle) ;
-                        recipes.add(new Recipe(recipeTitle, (long)id));
+                        Log.i(TAG, "Recipe found: " + recipeTitle);
+                        recipes.add(new Recipe(recipeTitle, (long) id));
                         myAdapter.notifyDataSetChanged();
 
-                    }
-                    else {
+                    } else {
                         resultText.setText("Not found");
                     }
                 }
@@ -164,9 +162,7 @@ public class SearchActivity extends AppCompatActivity {
                 publishProgress(50);
                 //Log.i(TAG, "Recipe found: " + recipeTitle) ;
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
 
             }
 
@@ -174,20 +170,19 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         //Type 2
-        public void onProgressUpdate(Integer ... args)
-        {
+        public void onProgressUpdate(Integer... args) {
             Log.i(TAG, "onProgressUpdate");
         }
+
         //Type3
-        public void onPostExecute(String fromDoInBackground)
-        {
+        public void onPostExecute(String fromDoInBackground) {
 
             Log.i(TAG, "String gotten is: " + fromDoInBackground);
         }
 
     }
 
-    private class RecipeAdapter extends BaseAdapter{
+    private class RecipeAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -203,7 +198,7 @@ public class SearchActivity extends AppCompatActivity {
 
         @Override
         public long getItemId(int position) {
-            return (long)position;
+            return (long) position;
         }
 
         @Override
@@ -212,19 +207,19 @@ public class SearchActivity extends AppCompatActivity {
 
             View recipeView = inflater.inflate(R.layout.recipe_list_layout, parent, false);
             TextView recipeTitle = recipeView.findViewById(R.id.recipe_title);
-            recipeTitle.setText( getItem(position).toString() );
+            recipeTitle.setText(getItem(position).toString());
 
             return recipeView;
         }
     }
 
-    public class Recipe{
+    public class Recipe {
         String title;
         long id;
 
         public Recipe(String title, long id) {
             this.title = title;
-            this.id  = id;
+            this.id = id;
         }
 
         public String getTitle() {

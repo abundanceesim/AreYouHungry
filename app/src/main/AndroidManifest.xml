@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AreYouHungry">
         <activity
+            android:name=".RecipeDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
