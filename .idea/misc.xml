@@ -3,20 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Hooshie/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/activity_recipe.xml" value="0.25" />
+        <entry key="..\:/Users/Hooshie/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/activity_recipe_details.xml" value="0.25" />
+        <entry key="..\:/Users/Hooshie/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/activity_search.xml" value="0.1" />
+        <entry key="..\:/Users/Hooshie/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/fragment_home.xml" value="0.11822916666666666" />
+        <entry key="..\:/Users/Hooshie/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/fragment_recipe.xml" value="0.311731843575419" />
+        <entry key="..\:/Users/Hooshie/AndroidStudioProjects/AreYouHungry/app/src/main/res/menu/navigation_menu.xml" value="0.12760416666666666" />
+        <entry key="..\:/Users/Hooshie/AndroidStudioProjects/AreYouHungry/app/src/main/res/menu/toolbar_menu.xml" value="0.1" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/activity_favourites.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/activity_recipe.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/activity_recipe_details.xml" value="0.2015625" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/activity_search.xml" value="0.41041666666666665" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/activity_signup.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/fragment_home.xml" value="0.33" />
-        <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/fragment_recipe.xml" value="0.41041666666666665" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/navigation_header.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/navigation_layout.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/recipe_list_layout.xml" value="0.5" />
+        <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/recipe_list_layout.xml" value="0.33" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/layout/toolbar_layout.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/menu/navigation_menu.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/abund/AndroidStudioProjects/AreYouHungry/app/src/main/res/menu/toolbar_menu.xml" value="0.20520833333333333" />

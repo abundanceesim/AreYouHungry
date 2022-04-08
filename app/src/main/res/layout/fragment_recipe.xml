@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".RecipeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -20,19 +20,19 @@
         <!-- TODO: Update blank fragment layout -->
         <TextView
             android:id="@+id/recipe_text"
-            app:layout_constraintTop_toBottomOf="@id/toolBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolBar"
             android:text="@string/hello_blank_fragment" />
 
         <Switch
             android:id="@+id/fav_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_below="@id/recipe_text"
             android:minHeight="48dp"
             android:text="Add to Favourites" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
 </FrameLayout>
