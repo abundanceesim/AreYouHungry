@@ -56,7 +56,7 @@ public class SearchActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.searchButton);
         resultText = findViewById(R.id.queryResult);
 
-        String searchQuery = "https://api.spoonacular.com/recipes/complexSearch?apiKey=17696a86da5e4c2a822ba6d7f503cf31&query=" + search + "&number=10";
+        String searchQuery = "https://api.spoonacular.com/recipes/complexSearch?apiKey=17696a86da5e4c2a822ba6d7f503cf31&number=10";
         //String searchQuery = "https://api.spoonacular.com/recipes/complexSearch?apiKey=9b125163604948b2a0a0878254ab65ff&number=6";
         searchButton.setOnClickListener(click -> {
             new searchTask().execute(searchQuery);
@@ -120,9 +120,9 @@ public class SearchActivity extends AppCompatActivity {
                     //Recipe recipe = new Recipe(recipeTitle);
                     if(recipeTitleLowerCase.contains(searchLowerCase)){
                         //resultText.setText(/*"Recipe " + */recipeTitle /*+ " with ID: " + id + " found"*/);
-                        Recipe recipe = new Recipe(recipeTitle);
+                        //Recipe recipe = new Recipe(recipeTitle);
                         Log.i(TAG, "Recipe found: " + recipeTitle) ;
-                        recipes.add(recipe);
+                        recipes.add(new Recipe(recipeTitle));
                         myAdapter.notifyDataSetChanged();
 
                     }
@@ -168,8 +168,8 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         public Object getItem(int position) {
             Recipe thisRow = recipes.get(position);
-            //return thisRow.title;
-            return thisRow;
+            return thisRow.title;
+            //return thisRow;
         }
 
         @Override
