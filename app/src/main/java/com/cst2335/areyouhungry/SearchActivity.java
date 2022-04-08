@@ -61,7 +61,7 @@ public class SearchActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.searchButton);
         resultText = findViewById(R.id.queryResult);
 
-        String searchQuery = "https://api.spoonacular.com/recipes/complexSearch?apiKey=17696a86da5e4c2a822ba6d7f503cf31&number=10";
+        String searchQuery = "https://api.spoonacular.com/recipes/complexSearch?apiKey=cd7241d7b8ad472a8fd36cf534dbaf46&number=10";
         //String searchQuery = "https://api.spoonacular.com/recipes/complexSearch?apiKey=9b125163604948b2a0a0878254ab65ff&number=6";
         searchButton.setOnClickListener(click -> {
             new searchTask().execute(searchQuery);
