@@ -1,6 +1,7 @@
 package com.cst2335.areyouhungry;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +32,8 @@ public class HomeActivity extends AppCompatActivity {
      * on Play Store. Once again, thank you!
      * From the team at RecipeWorks.co"
      * */
+    public static final String Shared_prefs = "SharedPreferencesHome";
+    public static final String NAME = "username";
     Toolbar tBar;
     ProgressBar progressBar;
     Button goToSearchPage;
@@ -42,6 +45,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        name = findViewById(R.id.userName);
 
         tBar = findViewById(R.id.toolBar);
         setSupportActionBar(tBar);
@@ -103,6 +108,23 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(goToSearch);
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences(Shared_prefs, MODE_PRIVATE);
+        String recentName = sharedPreferences.getString(NAME, "");
+        name.setText(recentName);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sharedPreferences = getSharedPreferences(Shared_prefs, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(NAME, name.getText().toString());
+        editor.apply();
     }
 
     public void updateProgress(){
