@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/toolBar"
-            android:text="Welcome to the Recipe App!"
+            android:text="@string/welcome_to_the_recipe_app"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/homepage_img"
-            android:text="First name:"
+            android:text="@string/first_name"
             android:textSize="16sp" />
 
         <EditText
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/nameText"
-            android:hint="Input name here"
+            android:hint="@string/input_name_here"
             android:inputType="textPersonName"
             android:minHeight="48dp" />
 
@@ -60,7 +60,7 @@
             android:layout_below="@id/userName"
             android:layout_centerHorizontal="true"
             android:padding="20dp"
-            android:text="Sign In" />
+            android:text="@string/sign_in" />
 
         <Button
             android:id="@+id/goToSearch"
@@ -69,7 +69,7 @@
             android:layout_below="@id/signIn"
             android:layout_centerHorizontal="true"
             android:padding="20dp"
-            android:text="Search Recipe" />
+            android:text="@string/search_recipe" />
 
 
         <ProgressBar

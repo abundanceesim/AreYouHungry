@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">क्या आप भूखे हैं</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">पकाने की विधि विवरण यहाँ जाएँ</string>
+    <string name="open">खुला</string>
+    <string name="close">बंद करे</string>
+    <string name="long_press_item_to_delete">हटाने के लिए आइटम को देर तक दबाएं</string>
+    <string name="welcome_to_the_recipe_app">पकाने की विधि ऐप में आपका स्वागत है!</string>
+    <string name="first_name">प्रथम नाम:</string>
+    <string name="input_name_here">इनपुट नाम यहाँ</string>
+    <string name="sign_in">दाखिल करना</string>
+    <string name="search_recipe">नुस्खा खोजें</string>
+    <string name="search_here">यहां तलाश करो</string>
+    <string name="result_would_be_displayed_here">परिणाम यहां प्रदर्शित किया जाएगा</string>
+    <string name="recipe_title_would_go_here">पकाने की विधि का शीर्षक यहां जाएगा</string>
+    <string name="back">वापस</string>
+    <string name="url_goes_here">यूआरएल यहाँ जाता है</string>
+    <string name="add_to_favourites">पसंदीदा में जोड़ें</string>
+    <string name="where_would_you_like_to_go">आप कहां जाना पसंद करेंगे?</string>
+    <string name="recipe_titles_will_go_here">पकाने की विधि के शीर्षक यहां जाएंगे</string>
+    <string name="recipe_page">पकाने की विधि पृष्ठ</string>
+    <string name="favorites">पसंदीदा</string>
+    <string name="home">घर</string>
+    <string name="search">खोज</string>
+    <string name="favourites">पसंदीदा</string>
+    <string name="help">मदद</string>
+</resources>

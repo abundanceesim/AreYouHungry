@@ -9,7 +9,7 @@
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="14dp"
-        android:text="Recipe title would go here"
+        android:text="@string/recipe_title_would_go_here"
         />
 
 </RelativeLayout>

@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/recipe_text"
-            android:text="URL goes here" />
+            android:text="@string/url_goes_here" />
 
 
         <Switch
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/recipe_url"
             android:minHeight="48dp"
-            android:text="Add to Favourites" />
+            android:text="@string/add_to_favourites" />
 
     </RelativeLayout>
 

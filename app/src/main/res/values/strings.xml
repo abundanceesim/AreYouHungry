@@ -1,7 +1,27 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">AreYouHungry</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Recipe details go here</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="long_press_item_to_delete">Long press item to delete</string>
+    <string name="welcome_to_the_recipe_app">Welcome to the Recipe App!</string>
+    <string name="first_name">First name:</string>
+    <string name="input_name_here">Input name here</string>
+    <string name="sign_in">Sign In</string>
+    <string name="search_recipe">Search Recipe</string>
+    <string name="search_here">Search here</string>
+    <string name="result_would_be_displayed_here">Result would be displayed here</string>
+    <string name="recipe_title_would_go_here">Recipe title would go here</string>
+    <string name="back">Back</string>
+    <string name="url_goes_here">URL goes here</string>
+    <string name="add_to_favourites">Add to Favourites</string>
+    <string name="where_would_you_like_to_go">Where would you like to go?</string>
+    <string name="recipe_titles_will_go_here">Recipe titles will go here</string>
+    <string name="favorites">Favorites</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="recipe_page">Recipe Page</string>
+    <string name="favourites">Favourites</string>
+    <string name="help">Help</string>
 </resources>

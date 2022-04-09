@@ -22,7 +22,7 @@
             android:id="@+id/searchText"
             android:layout_width="220dp"
             android:layout_height="48dp"
-            android:hint="Search here"
+            android:hint="@string/search_here"
             app:layout_constraintTop_toBottomOf="@+id/toolBar"
             tools:ignore="MissingConstraints" />
 
@@ -30,7 +30,7 @@
             android:id="@+id/searchButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Search"
+            android:text="@string/search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
 
@@ -40,7 +40,7 @@
             android:id="@+id/queryResult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Result would be displayed here"
+            android:text="@string/result_would_be_displayed_here"
             app:layout_constraintTop_toBottomOf="@+id/searchText" />
 
         <ListView
