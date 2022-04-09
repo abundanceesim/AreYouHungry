@@ -16,6 +16,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         Intent fromSearchActivity = getIntent();
         String recipeTitle = fromSearchActivity.getStringExtra("title");
+        String recipeURL = fromSearchActivity.getStringExtra("url");
 
 
         /*FragmentManager fragmentManager = getSupportFragmentManager();
@@ -31,6 +32,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         Bundle bundle = new Bundle();
         bundle.putString("title", recipeTitle);
+        bundle.putString("url", recipeURL);
         recipeFragment.setArguments(bundle);
     }
 }

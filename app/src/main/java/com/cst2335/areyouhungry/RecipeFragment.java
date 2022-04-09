@@ -26,6 +26,8 @@ public class RecipeFragment extends Fragment {
     Switch fav_switch;
     TextView recipeTitle;
     String title;
+    TextView recipeURL;
+    String url;
     boolean isFavourite;
 
     // TODO: Rename and change types of parameters
@@ -71,12 +73,17 @@ public class RecipeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipe, container, false);
         fav_switch = (Switch)view.findViewById(R.id.fav_switch);
         recipeTitle = (TextView)view.findViewById(R.id.recipe_text) ;
+        recipeURL = (TextView)view.findViewById(R.id.recipe_url) ;
 
         if(savedInstanceState == null) {
             // Get back arguments that were passed into the Bundle
             if (getArguments() != null) {
                 title = getArguments().getString("title", "");
                 recipeTitle.setText(title);
+
+                url = getArguments().getString("url", "");
+                recipeURL.setText("Recipe URL: " + url);
+
 
             }
         }

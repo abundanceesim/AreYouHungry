@@ -76,10 +76,12 @@ public class SearchActivity extends AppCompatActivity {
 
         myList.setOnItemClickListener((list, view, position, id) -> {
             Recipe recipe = recipes.get(position);
-            id = recipes.indexOf(recipe); //the id of the recipe is it's position in the list.
+            id = recipes.indexOf(recipe);
             String title = recipe.getTitle();
+            String url = recipe.getUrl();
             Intent goToFragment = new Intent(this, RecipeDetailsActivity.class);
             goToFragment.putExtra("title", title);
+            goToFragment.putExtra("url", url);
             startActivity(goToFragment);
 
         });
@@ -170,7 +172,7 @@ public class SearchActivity extends AppCompatActivity {
                             Log.i(TAG, "Recipe ingredients line " + (j+1) + ": "+ ingredientLines[j]);
 
                         }
-                        recipes.add(new Recipe(recipeTitle));
+                        recipes.add(new Recipe(recipeTitle, recipeURL));
                         myAdapter.notifyDataSetChanged();
 
                     } else {
@@ -234,10 +236,12 @@ public class SearchActivity extends AppCompatActivity {
 
     public class Recipe {
         String title;
+        String url;
         //long id;
 
-        public Recipe(String title/*, long id*/) {
+        public Recipe(String title, String url/*, long id*/) {
             this.title = title;
+            this.url = url;
             //this.id = id;
         }
 
@@ -249,6 +253,13 @@ public class SearchActivity extends AppCompatActivity {
             this.title = title;
         }
 
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
         /*public long getId() {
             return id;
         }

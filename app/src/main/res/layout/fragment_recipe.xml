@@ -25,11 +25,19 @@
             android:layout_below="@id/toolBar"
             android:text="@string/hello_blank_fragment" />
 
+        <TextView
+            android:id="@+id/recipe_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recipe_text"
+            android:text="URL goes here" />
+
+
         <Switch
             android:id="@+id/fav_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/recipe_text"
+            android:layout_below="@id/recipe_url"
             android:minHeight="48dp"
             android:text="Add to Favourites" />
 
