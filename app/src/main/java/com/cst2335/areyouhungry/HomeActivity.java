@@ -26,11 +26,6 @@ public class HomeActivity extends AppCompatActivity {
     /**TO DO:
      * Make Snackbar work
      * Use Async Task to retrieve probably a title for the recipe app
-     * Make frame layout and use it for the person's name or something. Create a fragment and pass the person's name into it
-     * Add a login button that redirects the user to an activity(HomeFragment) which is an About page.
-     * "Thank you so much for using our app, usersName! We really hope you enjoy the experience. Please do well to leave a rating for our app
-     * on Play Store. Once again, thank you!
-     * From the team at RecipeWorks.co"
      * */
     public static final String Shared_prefs = "SharedPreferencesHome";
     public static final String NAME = "username";
@@ -93,6 +88,7 @@ public class HomeActivity extends AppCompatActivity {
         goToSearchPage = findViewById(R.id.goToSearch);
 
         signUp = findViewById(R.id.signIn);
+        /** When Sign up button is clicked, launch About Activity*/
         signUp.setOnClickListener( click -> {
             name = findViewById(R.id.userName);
             String userName = name.getText().toString();
@@ -101,6 +97,7 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(goToSignUpPage);
         });
 
+        /** When button is clicked, update progress in progress bar and launch Search Activity.*/
         goToSearchPage.setOnClickListener( click -> {
             updateProgress();
             Toast.makeText(this, "Loading complete", Toast.LENGTH_SHORT).show();
@@ -110,6 +107,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    /** Retrieve saved username from SharedPreferences file.*/
     @Override
     protected void onResume() {
         super.onResume();
@@ -118,6 +116,7 @@ public class HomeActivity extends AppCompatActivity {
         name.setText(recentName);
     }
 
+    /** Save username to SharedPreferences file*/
     @Override
     protected void onPause() {
         super.onPause();
@@ -127,6 +126,7 @@ public class HomeActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /** Method to update progress for the timer*/
     public void updateProgress(){
         progressBar = findViewById(R.id.progressBar);
         final Timer t = new Timer();
@@ -140,6 +140,7 @@ public class HomeActivity extends AppCompatActivity {
         t.schedule(tt, 0, 100);
     }
 
+    /** This method inflates the Toolbar menu*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -148,6 +149,7 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }
 
+    /** This method is called each time a Toolbar menu item is selected*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -183,7 +185,6 @@ public class HomeActivity extends AppCompatActivity {
 
                         .setMessage("Welcome to the Home Page of our recipe app. \nThis page contains a toolbar for navigation across " +
                                 "all pages. \nDo not forget to sign up using the text box and button below. ")
-                        //Remove row from list and also delete it from the database.
                         .setPositiveButton("GOT IT", (click, arg) -> { })
 
                         //Display the Alert Dialog.

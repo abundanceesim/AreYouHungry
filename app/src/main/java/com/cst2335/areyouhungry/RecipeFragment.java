@@ -1,6 +1,8 @@
 package com.cst2335.areyouhungry;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,16 +20,11 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link RecipeFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Recipe Fragment class which would contain information about each recipe.
+ * @author Abundance Esim
+ * @version 1.0.0
  */
 public class RecipeFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     Toolbar tBar;
     Switch fav_switch;
@@ -40,41 +37,26 @@ public class RecipeFragment extends Fragment {
     boolean isFavourite;
     Button URLButton;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    String Shared_prefs = "SharedPreferencesRecipeDetails";
+    String TITLE = "title";
+    String INGREDIENTS = "ingredients";
+    String URL = "url";
 
     public RecipeFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RecipeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RecipeFragment newInstance(String param1, String param2) {
-        RecipeFragment fragment = new RecipeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
 
     }
+
+    /*@Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        SharedPreferences preferences = context.getSharedPreferences(Shared_prefs, Context.MODE_PRIVATE);
+    } */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,6 +84,15 @@ public class RecipeFragment extends Fragment {
                 ingredients = getArguments().getString("ingredients", "");
                 recipeIngredients.setText(ingredients);
 
+                /*If the strings aren't empty, put them in the shared preferences file */
+                if((!title.isEmpty() ) && (!ingredients.isEmpty()) && (!url.isEmpty())){
+                    SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Shared_prefs, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(TITLE, title);
+                    editor.putString(INGREDIENTS, ingredients);
+                    editor.putString(URL, url);
+                    editor.apply();
+                }
 
             }
         }
@@ -126,4 +117,24 @@ public class RecipeFragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Shared_prefs, Context.MODE_PRIVATE);
+        String recentTitle = sharedPreferences.getString(TITLE, "");
+        String recentIngredients = sharedPreferences.getString(INGREDIENTS, "");
+        String recentURL = sharedPreferences.getString(URL, "");
+        if (recentTitle != null){
+            recipeTitle.setText(recentTitle);
+        }
+        if (recentIngredients != null){
+            recipeIngredients.setText(recentIngredients);
+        }
+        if (recipeURL != null){
+            recipeURL.setText(recentURL);
+        }
+
+    }
+
 }

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -57,6 +59,7 @@ public class SearchActivity extends AppCompatActivity {
         myList = findViewById(R.id.listView);
         myList.setAdapter( myAdapter = new RecipeAdapter());
 
+        /** When the search button is clicked, fetch results for searched recipe.*/
         searchButton.setOnClickListener(click -> {
             recipes.clear();
             searchedRecipe = findViewById(R.id.searchText);
@@ -65,7 +68,7 @@ public class SearchActivity extends AppCompatActivity {
             Toast.makeText(SearchActivity.this, "Searching for " + searchLowerCase + " recipes...", Toast.LENGTH_SHORT).show();
             //modification starts here:
             String searchQuery = "https://api.edamam.com/search?app_id=bd8ab790&app_key=466eca9597ecd8b4fbedecfaca1c6250&q=" + searchLowerCase; //modified
-            System.err.println("Search query" + searchQuery);
+            System.err.println("Search query:" + searchQuery);
 
             String searchURL = searchQuery.trim();
             System.err.println("Searched string(in on Create):" + search);
@@ -76,6 +79,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        /**When a list item is clicked on, start Recipe Details Activity*/
         myList.setOnItemClickListener((list, view, position, id) -> {
             Recipe recipe = recipes.get(position);
             id = recipes.indexOf(recipe);
@@ -93,6 +97,7 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+    /** Retrieve searched recipe keyword from SharedPreferences file.*/
     @Override
     protected void onResume() {
         super.onResume();
@@ -101,6 +106,7 @@ public class SearchActivity extends AppCompatActivity {
         searchedRecipe.setText(recentRecipe);
     }
 
+    /** Store searched recipe keyword in SharedPreferences file.*/
     @Override
     protected void onPause() {
         super.onPause();
@@ -110,6 +116,7 @@ public class SearchActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /** Inflate Toolbar menu.*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
@@ -118,6 +125,63 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
+    /** This method is executed each time a Toolbar menu item is selected*/
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        String message = null;
+        //Look at your menu XML file. Put a case for every id in that file:
+        switch(item.getItemId())
+        {
+            //what to do when the menu item is selected:
+            case R.id.home_item:
+                message = "Already in Home";
+                Intent goToHome = new Intent(SearchActivity.this, HomeActivity.class);
+                startActivity(goToHome);
+                break;
+            case R.id.search_item:
+                message = "Already in Recipe Search Page";
+                break;
+            case R.id.recipe_item:
+                message = "Redirecting to Recipe details page";
+                Intent goToDetails = new Intent(SearchActivity.this, RecipeDetailsActivity.class);
+                startActivity(goToDetails);
+                break;
+            case R.id.favourites_item:
+                message = "Redirecting to Favourites";
+                Intent goToFavourites = new Intent(SearchActivity.this, FavouritesActivity.class);
+                startActivity(goToFavourites);
+                break;
+
+            case R.id.help_overflow:
+                //remember to make the snackbar
+                //Snackbar snack = Snackbar.make(R.id.help_overflow, "Help menu clicked", Snackbar.LENGTH_SHORT).show();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Help")
+
+                        .setMessage("Welcome to the Recipe Search Page! \nINSTRUCTIONS:\n• Here you would enter a keyword you would like your recipe title to contain into the text box below " +
+                                "and click on the search button. \n• Similar recipes would be displayed in the list below. "+
+                                "\n• Your last searched recipe would be saved for use the next time you open the app.")
+                        //Remove row from list and also delete it from the database.
+                        .setPositiveButton("GOT IT", (click, arg) -> { })
+
+                        //Display the Alert Dialog.
+                        .create().show();
+
+        }
+        if ( message != null ) {
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        }
+        /*DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);*/
+        return true;
+    }
+
+    /**
+     * SearchTask class that handles fetching and retrieval of recipes containing searched keyword.
+     * @author Abundance Esim
+     * @version 1.0.0
+     */
     class SearchTask extends AsyncTask<String, Integer, String> {
         static private final String TAG = "SearchTask";
 
@@ -200,6 +264,11 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Recipe Adapter class for the inflation of each list entry.
+     * @author Abundance Esim
+     * @version 1.0.0
+     * */
     private class RecipeAdapter extends BaseAdapter {
 
         @Override
@@ -227,6 +296,11 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Recipe class for creating recipe objects that would be added to the list.
+     * @author Abundance Esim
+     * @version 1.0.0
+     */
     public class Recipe {
         String title;
         String url;
