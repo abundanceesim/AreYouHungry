@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -61,14 +62,18 @@ public class SearchActivity extends AppCompatActivity {
             searchedRecipe = findViewById(R.id.searchText);
             String search = searchedRecipe.getText().toString();
             String searchLowerCase = search.toLowerCase();
-
+            Toast.makeText(SearchActivity.this, "Searching for " + searchLowerCase + " recipes...", Toast.LENGTH_SHORT).show();
             //modification starts here:
-            String searchQuery = "https://api.edamam.com/search?app_id=bd8ab790&app_key=466eca9597ecd8b4fbedecfaca1c6250&q=" + search; //modified
+            String searchQuery = "https://api.edamam.com/search?app_id=bd8ab790&app_key=466eca9597ecd8b4fbedecfaca1c6250&q=" + searchLowerCase; //modified
             System.err.println("Search query" + searchQuery);
 
             String searchURL = searchQuery.trim();
             System.err.println("Searched string(in on Create):" + search);
-            new searchTask().execute(searchURL);
+            new SearchTask().execute(searchURL);
+
+            if(recipes.size() <= 0){
+                resultText.setText("No results");
+            }
         });
 
         myList.setOnItemClickListener((list, view, position, id) -> {
@@ -76,9 +81,12 @@ public class SearchActivity extends AppCompatActivity {
             id = recipes.indexOf(recipe);
             String title = recipe.getTitle();
             String url = recipe.getUrl();
+            String ingredients = recipe.getIngredients();
+
             Intent goToFragment = new Intent(this, RecipeDetailsActivity.class);
             goToFragment.putExtra("title", title);
             goToFragment.putExtra("url", url);
+            goToFragment.putExtra("ingredients", ingredients);
             startActivity(goToFragment);
 
         });
@@ -110,8 +118,8 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
-    class searchTask extends AsyncTask<String, Integer, String> {
-        static private final String TAG = "MyHTTPRequest";
+    class SearchTask extends AsyncTask<String, Integer, String> {
+        static private final String TAG = "SearchTask";
 
         //Type3                Type1
         public String doInBackground(String... args) {
@@ -136,10 +144,6 @@ public class SearchActivity extends AppCompatActivity {
                 myList.setAdapter( myAdapter = new RecipeAdapter());
 
                 EditText searchedRecipe = (EditText)findViewById(R.id.searchText);
-                String search = searchedRecipe.getText().toString();
-                String searchLowerCase = search.toLowerCase();
-                resultText = findViewById(R.id.queryResult);
-
 
                 JSONObject uvReport = new JSONObject(result); // convert string to JSON: Look at slide 27:
                 System.out.println(uvReport.toString());
@@ -156,32 +160,28 @@ public class SearchActivity extends AppCompatActivity {
                     String recipeURL = recipeObject.getString("url");
                     JSONArray ingredientsArray = recipeObject.getJSONArray("ingredientLines");
 
-                    String recipeTitleLowerCase = recipeTitle.toLowerCase();
-
                     String[] ingredientLines = new String[ingredientsArray.length()];
 
-                    if(recipeTitleLowerCase.contains(searchLowerCase)){
-
-                        Log.i(TAG, "What was searched: " + whatWasTyped) ;
-                        Log.i(TAG, "Recipe found: " + recipeTitle) ;
-                        for(int j = 0; j < ingredientsArray.length(); j++){
-                            ingredientLines[j] = ingredientsArray.getString(j);
-                            Log.i(TAG, "Recipe ingredients line " + (j+1) + ": "+ ingredientLines[j]);
-
-                        }
-                        recipes.add(new Recipe(recipeTitle, recipeURL));
-                        myAdapter.notifyDataSetChanged();
-
-                    } else {
-                        resultText.setText("Not found");
+                    resultText.setText("Recipe found");
+                    Log.i(TAG, "What was searched: " + whatWasTyped) ;
+                    Log.i(TAG, "Recipe found: " + recipeTitle) ;
+                    for(int j = 0; j < ingredientsArray.length(); j++){
+                        ingredientLines[j] = "○ " + ingredientsArray.getString(j).trim();
+                        Log.i(TAG, "Recipe ingredients line " + (j+1) + ": "+ ingredientLines[j]);
                     }
+                    String ingredientsConcat = String.join("\n", ingredientLines);
+                    System.out.println("Concatenated ingredients: " + ingredientsConcat);
+
+                    recipes.add(new Recipe(recipeTitle, recipeURL, ingredientsConcat));//add recipe title, url and concatenated ingredients to recipes list.
+                    myAdapter.notifyDataSetChanged();
+
                 }
                 publishProgress(25);
                 Thread.sleep(1000);
                 publishProgress(50);
 
             } catch (Exception e) {
-
+                //e.printStackTrace();
             }
 
             return "Done";
@@ -203,9 +203,7 @@ public class SearchActivity extends AppCompatActivity {
     private class RecipeAdapter extends BaseAdapter {
 
         @Override
-        public int getCount() {
-            return recipes.size();
-        }
+        public int getCount() { return recipes.size(); }
 
         @Override
         public Object getItem(int position) {
@@ -215,9 +213,7 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         @Override
-        public long getItemId(int position) {
-            return (long) position;
-        }
+        public long getItemId(int position) { return (long) position; }
 
         @Override
         public View getView(int position, View old, ViewGroup parent) {
@@ -234,11 +230,13 @@ public class SearchActivity extends AppCompatActivity {
     public class Recipe {
         String title;
         String url;
+        String ingredients;
         //long id;
 
-        public Recipe(String title, String url/*, long id*/) {
+        public Recipe(String title, String url, String ingredients/*, long id*/) {
             this.title = title;
             this.url = url;
+            this.ingredients = ingredients;
             //this.id = id;
         }
 
@@ -257,6 +255,16 @@ public class SearchActivity extends AppCompatActivity {
         public void setUrl(String url) {
             this.url = url;
         }
+
+        public String getIngredients() {
+            return ingredients;
+        }
+
+        public void setIngredients(String ingredients) {
+            this.ingredients = ingredients;
+        }
+
+
         /*public long getId() {
             return id;
         }

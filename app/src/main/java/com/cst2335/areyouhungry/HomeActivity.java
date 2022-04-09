@@ -24,7 +24,7 @@ import java.util.TimerTask;
 public class HomeActivity extends AppCompatActivity {
     /**TO DO:
      * Make Snackbar work
-     * Use Aync Task to retrieve probably a title for the recipe app
+     * Use Async Task to retrieve probably a title for the recipe app
      * Make frame layout and use it for the person's name or something. Create a fragment and pass the person's name into it
      * Add a login button that redirects the user to an activity(HomeFragment) which is an About page.
      * "Thank you so much for using our app, usersName! We really hope you enjoy the experience. Please do well to leave a rating for our app
@@ -91,9 +91,6 @@ public class HomeActivity extends AppCompatActivity {
         signUp.setOnClickListener( click -> {
             name = findViewById(R.id.userName);
             String userName = name.getText().toString();
-            //Bundle args = new Bundle();
-            //args.putString("username", userName);
-            //updateProgress();
             Intent goToSignUpPage = new Intent(HomeActivity.this, SignUpActivity.class);
             goToSignUpPage.putExtra("username", userName);
             startActivity(goToSignUpPage);

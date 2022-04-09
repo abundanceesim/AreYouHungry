@@ -1,15 +1,21 @@
 package com.cst2335.areyouhungry;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,12 +29,16 @@ public class RecipeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    Toolbar tBar;
     Switch fav_switch;
     TextView recipeTitle;
     String title;
     TextView recipeURL;
     String url;
+    TextView recipeIngredients;
+    String ingredients;
     boolean isFavourite;
+    Button URLButton;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -71,9 +81,14 @@ public class RecipeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_recipe, container, false);
+        tBar = (Toolbar)view.findViewById(R.id.toolBar);
         fav_switch = (Switch)view.findViewById(R.id.fav_switch);
         recipeTitle = (TextView)view.findViewById(R.id.recipe_text) ;
-        recipeURL = (TextView)view.findViewById(R.id.recipe_url) ;
+        recipeURL = (TextView)view.findViewById(R.id.recipe_url);
+        recipeIngredients = (TextView)view.findViewById(R.id.ingredients_text);
+        URLButton = (Button)view.findViewById(R.id.goToURL);
+
+        tBar.setTitle("Recipe Details v1.0.0 by Abundance");
 
         if(savedInstanceState == null) {
             // Get back arguments that were passed into the Bundle
@@ -84,14 +99,26 @@ public class RecipeFragment extends Fragment {
                 url = getArguments().getString("url", "");
                 recipeURL.setText("Recipe URL: " + url);
 
+                ingredients = getArguments().getString("ingredients", "");
+                recipeIngredients.setText(ingredients);
+
 
             }
         }
 
+        URLButton.setOnClickListener( click ->{
+            url = getArguments().getString("url", "");
+            Intent goToURL = new Intent(Intent.ACTION_VIEW);
+            goToURL.setData( Uri.parse(url) );
+            startActivity(goToURL);
+        });
+
         fav_switch.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 isFavourite = true;
-                Toast.makeText(getActivity(), "Added to favourites", Toast.LENGTH_SHORT).show();
+                Snackbar snack = Snackbar.make(fav_switch, "Added to favourites", Snackbar.LENGTH_SHORT);
+                snack.show();
+                //Toast.makeText(getActivity(), "Added to favourites", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "Removed from favourites", Toast.LENGTH_LONG).show();
             }

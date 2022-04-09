@@ -17,29 +17,72 @@
             layout="@layout/toolbar_layout"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
             android:id="@+id/recipe_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/toolBar"
-            android:text="@string/hello_blank_fragment" />
+            android:text="@string/hello_blank_fragment"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/ingredients_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recipe_text"
+            android:layout_marginTop="2dp"
+            android:paddingLeft="5dp"
+            android:text="Ingredients: "
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/ingredients_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ingredients_title"
+            android:text="Ingredients will go here"
+            android:paddingLeft="12dp"/>
+
+        <TextView
+            android:id="@+id/url_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ingredients_text"
+            android:text="Link to Recipe: "
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="5dp"/>
 
         <TextView
             android:id="@+id/recipe_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/recipe_text"
-            android:text="@string/url_goes_here" />
+            android:layout_below="@id/url_title"
+            android:text="@string/url_goes_here"
+            android:paddingLeft="12dp"/>
 
+        <Button
+            android:id="@+id/goToURL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recipe_url"
+            android:text="Go to URL"
+            android:layout_centerHorizontal="true"/>
 
         <Switch
             android:id="@+id/fav_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/recipe_url"
+            android:layout_below="@id/goToURL"
             android:minHeight="48dp"
-            android:text="@string/add_to_favourites" />
+            android:text="@string/add_to_favourites"
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
 

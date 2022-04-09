@@ -13,25 +13,23 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
 
+        //getting results from search activity
         Intent fromSearchActivity = getIntent();
         String recipeTitle = fromSearchActivity.getStringExtra("title");
         String recipeURL = fromSearchActivity.getStringExtra("url");
+        String recipeIngredients = fromSearchActivity.getStringExtra("ingredients");
 
-
-        /*FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.recipe_frame, RecipeFragment.class, null)
-                .setReorderingAllowed(true)
-                .addToBackStack("recipe").commit();*/
-
+        //starting fragment transaction to replace frame layout with fragment
         RecipeFragment recipeFragment = new RecipeFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frame2, recipeFragment);    // add Fragment
         ft.commit();
 
+        //sending arguments to fragment to be used to edit layout
         Bundle bundle = new Bundle();
         bundle.putString("title", recipeTitle);
         bundle.putString("url", recipeURL);
+        bundle.putString("ingredients", recipeIngredients);
         recipeFragment.setArguments(bundle);
     }
 }
