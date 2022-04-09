@@ -23,6 +23,7 @@ public class FavouritesActivity extends AppCompatActivity {
         Toolbar tBar = findViewById(R.id.toolBar);
         setSupportActionBar(tBar);
         getSupportActionBar().setTitle("Favourites");
+
     }
 
     @Override
