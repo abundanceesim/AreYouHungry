@@ -25,11 +25,18 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * This class is the Homepage of the application. It is the first activity the user would see once the application is launched.
+ * It contains various a toolbar, navigation drawer and various widgets which would be used to transition between activities.
+ * @author Abundance Esim
+ * @version 1.0.0
+ */
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     /**TO DO:
-     * Make Snackbar work
-     * Use Async Task to retrieve probably a title for the recipe app
+     * Use Async Task to retrieve probably an image for the app
      * */
+
+    /** Shared Preferences file where saved data would be stored.*/
     public static final String Shared_prefs = "SharedPreferencesHome";
     public static final String NAME = "username";
     //Toolbar tBar;
@@ -179,6 +186,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    /**
+     * This method is called each time an item from the navigation menu is selected.
+     * @param item The menu item selected by the user.
+     * @return Boolean
+     */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 

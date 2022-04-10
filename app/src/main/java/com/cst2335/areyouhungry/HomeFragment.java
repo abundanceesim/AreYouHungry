@@ -1,5 +1,6 @@
 package com.cst2335.areyouhungry;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +11,13 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-
+/**
+ * This fragment displays welcome information to the user after they have signed up.
+ * @author Abundance Esim
+ * @version 1.0.0
+ */
 public class HomeFragment extends Fragment {
+    /** Widgets and string that would be used in the fragment.*/
     Toolbar tBar;
     TextView textView;
     Button backButton;
@@ -27,6 +33,13 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * This method inflates a view using a layout and modifies the layout before returning that view.
+     * @param inflater The layout inflater.
+     * @param container The ViewGroup containing the view.
+     * @param savedInstanceState Bundle object.
+     * @return view The view inflated.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +59,11 @@ public class HomeFragment extends Fragment {
                         "\n \n From the team at RecipeWorks.co");
             }
         }
+
+        /** When the back button is clicked, finish the activity using this fragment*/
+        backButton.setOnClickListener( click ->{
+            getActivity().finish();
+        });
         // Inflate the layout for this fragment
         return view;
     }

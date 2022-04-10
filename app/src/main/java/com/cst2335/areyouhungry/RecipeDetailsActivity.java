@@ -6,6 +6,11 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+/**
+ * This class would contains the frame layout which would be replaced by the recipe details from the API results.
+ * @author Abundance Esim
+ * @version 1.0.0
+ */
 public class RecipeDetailsActivity extends AppCompatActivity {
 
     @Override
