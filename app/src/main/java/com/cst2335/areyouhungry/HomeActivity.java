@@ -11,25 +11,28 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     /**TO DO:
      * Make Snackbar work
      * Use Async Task to retrieve probably a title for the recipe app
      * */
     public static final String Shared_prefs = "SharedPreferencesHome";
     public static final String NAME = "username";
-    Toolbar tBar;
+    //Toolbar tBar;
     ProgressBar progressBar;
     Button goToSearchPage;
     int counter = 0;
@@ -43,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
 
         name = findViewById(R.id.userName);
 
-        tBar = findViewById(R.id.toolBar);
+        Toolbar tBar = findViewById(R.id.toolBar);
         setSupportActionBar(tBar);
         getSupportActionBar().setTitle("Home v1.0.0 by Abundance");
 
@@ -55,33 +58,7 @@ public class HomeActivity extends AppCompatActivity {
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(view ->{
-            String message = null;
-            switch (view.getItemId()){
-                case R.id.home_item:
-                   message = "Already in home";
-                   break;
-                case R.id.search_item:
-                    message = "Redirecting to Search page";
-                    Intent goToSearch = new Intent(HomeActivity.this, SearchActivity.class);
-                    startActivity(goToSearch);
-                    break;
-                case R.id.recipe_item:
-                    message = "Redirecting to Recipe details page";
-                    Intent goToDetails = new Intent(HomeActivity.this, RecipeActivity.class);
-                    startActivity(goToDetails);
-                    break;
-                case R.id.favourites_item:
-                    message = "Redirecting to Favourites";
-                    Intent goToFavourites = new Intent(HomeActivity.this, FavouritesActivity.class);
-                    startActivity(goToFavourites);
-                    break;
-            }
-            if ( message != null ) {
-                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-            }
-            return true;
-        });
+        navigationView.setNavigationItemSelectedListener(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -178,8 +155,11 @@ public class HomeActivity extends AppCompatActivity {
                 break;
 
             case R.id.help_overflow:
-                //remember to make the snackbar
-                //Snackbar snack = Snackbar.make(R.id.help_overflow, "Help menu clicked", Snackbar.LENGTH_SHORT).show();
+
+                goToSearchPage = findViewById(R.id.goToSearch);
+                Snackbar snack = Snackbar.make(goToSearchPage, "Help menu clicked", Snackbar.LENGTH_SHORT);
+                snack.show();
+
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Help")
 
@@ -194,9 +174,43 @@ public class HomeActivity extends AppCompatActivity {
         if ( message != null ) {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
-        /*DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        drawerLayout.closeDrawer(GravityCompat.START);*/
+
         return true;
     }
 
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        String message = null;
+        switch (item.getItemId()){
+            case R.id.home_item:
+                message = "Already in home";
+                break;
+            case R.id.search_item:
+                message = "Redirecting to Search page";
+                Intent goToSearch = new Intent(HomeActivity.this, SearchActivity.class);
+                startActivity(goToSearch);
+                break;
+            case R.id.recipe_item:
+                message = "Redirecting to Recipe details page";
+                Intent goToDetails = new Intent(HomeActivity.this, RecipeActivity.class);
+                startActivity(goToDetails);
+                break;
+            case R.id.favourites_item:
+                message = "Redirecting to Favourites";
+                Intent goToFavourites = new Intent(HomeActivity.this, FavouritesActivity.class);
+                startActivity(goToFavourites);
+                break;
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        if ( message != null ) {
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        }
+
+        return false;
+    }
 }
