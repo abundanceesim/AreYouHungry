@@ -1,3 +1,3 @@
 # AreYouHungry
-Simple recipe app that makes use of a recipe API.
+Simple recipe app that consumes a REST API to generate requested recipes.
 Developed by Abundance Esim, Harshang Shah and Shreyansh Kothari.
